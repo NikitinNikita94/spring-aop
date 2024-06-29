@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="1abc" author="Nikitin-Nikita">
+        <preConditions>
+            <not>
+                <tableExists tableName="track_time"/>
+            </not>
+        </preConditions>
+        <createTable tableName="track_time">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="class_name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="method_name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_execution_time" type="java.lang.Long">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_at" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="track_time"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
